@@ -1,9 +1,8 @@
-import { View, Text, TouchableOpacity, Image, TextInput,ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput,ScrollView,StyleSheet } from 'react-native'
 import React,{ useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {ArrowLeftIcon} from 'react-native-heroicons/solid'
-import { themeColors } from '../theme/index'
-import {styles} from '../theme/styles'
+import { themeColors } from '../theme/'
 import { useNavigation } from '@react-navigation/native'
 import { AsyncStorage } from 'react-native';
 
@@ -64,77 +63,173 @@ export default function LoginScreen() {
   };
 
   const navigation = useNavigation();
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#FFF',
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      backgroundColor: '#FFD700',
+      padding: 10,
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
+    },
+    backBtn: {
+      backgroundColor: '#FFD700',
+      padding: 8,
+      borderRadius: 20,
+      marginLeft: 10,
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: '#000',
+      marginLeft: 50,
+    },
+    form: {
+      paddingHorizontal: 30,
+      marginTop: 40,
+    },
+    input: {
+      backgroundColor: '#EFEFEF',
+      color: '#000',
+      borderRadius: 10,
+      padding: 15,
+      marginBottom: 10,
+    },
+    forgotPassword: {
+      alignItems: 'flex-end',
+      marginBottom: 10,
+    },
+    forgotPasswordText: {
+      color: '#000',
+    },
+    loginBtn: {
+      backgroundColor: '#FFD700',
+      borderRadius: 30,
+      paddingVertical: 15,
+      paddingHorizontal: 50,
+      marginBottom: 20,
+    },
+    loginText: {
+      color: '#000',
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+    orText: {
+      color: '#000',
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 10,
+    },
+    socialButtons: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: 20,
+    },
+    
+    socialMediaBtn: {
+      backgroundColor: '#EFEFEF',
+      borderRadius: 10,
+      padding: 15,
+    },
+    socialMediaIcon: {
+      width: 30,
+      height: 30,
+    },
+    signUpContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: 20,
+    },
+    signUpText: {
+      color: '#000',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+    signUpLink: {
+      color: '#FFD700',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+    loginButton: {
+      backgroundColor: 'purple',
+      borderRadius: 30,
+      paddingHorizontal: 40,
+      paddingVertical: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: 'white',
+      textAlign: 'center',
+    },
+
+  });
+
   return (
     <ScrollView>
-    {loading && <Loading />}
-    <View className="flex-1 bg-white" style={{backgroundColor: themeColors.bg}}>
-      <SafeAreaView  className="flex ">
-        <View className="flex-row justify-start">
-          <TouchableOpacity onPress={()=> navigation.goBack()} 
-          className="bg-yellow-400 p-2 rounded-tr-2xl rounded-bl-2xl ml-4">
-            <ArrowLeftIcon size="20" color="black" />
+      {loading && <Loading />}
+      <View style={[styles.container, {backgroundColor: themeColors.bg}]}>
+        <SafeAreaView style={styles.flex}>
+          <TouchableOpacity onPress={()=> navigation.goBack()} style={styles.backButton}>
+            <ArrowLeftIcon size={20} color="black" />
           </TouchableOpacity>
-        </View>
-        <View  className="flex-row justify-center my-4">
-          
-          
-        </View>
-        
-        
-      </SafeAreaView>
-      <View 
-        style={[styles.roundedTl50, styles.roundedTr50]} 
-        className="flex-1 bg-white px-8 pt-8">
-          <View className="form space-y-2">
-            <Text className="text-gray-700 ml-4" >Email Address</Text>
+        </SafeAreaView>
+        <View style={[styles.content, styles.roundedTop]}>
+          <View style={styles.form}>
+            <Text style={styles.label}>Email Address</Text>
             <TextInput 
-              className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+              style={styles.input}
               placeholder="email"
               value={username}
               onChangeText={setUsername}
             />
-            <Text className="text-gray-700 ml-4" style={[]}>Password</Text>
+            <Text style={styles.label}>Password</Text>
             <TextInput 
-              className="p-4 bg-gray-100 text-gray-700 rounded-2xl" style={[]}
+              style={styles.input}
               secureTextEntry
               placeholder="password"
               value={password}
               onChangeText={setPassword}
             />
-            <TouchableOpacity className="flex items-end" style={[]}>
-              <Text className="text-gray-700 mb-5" style={[]}>Forgot Password?</Text>
+            <TouchableOpacity style={styles.forgotPassword}>
+              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-              className="py-3 bg-yellow-400 rounded-xl" style={[]}>
-                <Text 
-                    className="text-xl font-bold text-center text-gray-700" style={[]} onPress={handleLogin} 
-                >
+            <Text style={styles.loginButton} onPress={handleLogin}>
                         Login
                 </Text>
-                
-             </TouchableOpacity>
-            
           </View>
-          <Text className="text-xl text-gray-700 font-bold text-center py-5" style={[]}>Or</Text>
-          <View className="flex-row justify-center space-x-12" style={[]}>
-            <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl" style={[]}>
-              <Image source={require('../assets/icons/google.png')} className="w-10 h-10" style={[]} />
+          <Text style={styles.orText}>Or</Text>
+          <View style={styles.socialButtons}>
+            <TouchableOpacity style={styles.socialButton}>
+              <Image 
+                source={require('../assets/icons/google.png')} 
+                style={styles.socialButtonImage} 
+              />
             </TouchableOpacity>
-            <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
-              <Image source={require('../assets/icons/facebook.png')} className="w-10 h-10" style={[]} />
+            <TouchableOpacity style={styles.socialButton}>
+              <Image 
+                source={require('../assets/icons/facebook.png')} 
+                style={styles.socialButtonImage} 
+              />
             </TouchableOpacity>
           </View>
-          <View className="flex-row justify-center mt-7" style={[]}>
-              <Text className="text-gray-500 font-semibold" style={[]}>
-                  Don't have an account?
-              </Text>
-              <TouchableOpacity onPress={()=> navigation.navigate('SignUp')}>
-                  <Text className="font-semibold text-yellow-500" style={[]}> Sign Up</Text>
-              </TouchableOpacity>
+          <View style={styles.signUp}>
+            <Text style={styles.signUpText}>Don't have an account?</Text>
+            <TouchableOpacity onPress={()=> navigation.navigate('SignUp')}>
+              <Text style={styles.signUpLink}>Sign Up</Text>
+            </TouchableOpacity>
           </View>
-          
+        </View>
       </View>
-    </View>
     </ScrollView>
+
   )
+
+  
 }
