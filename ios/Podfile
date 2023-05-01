@@ -23,6 +23,8 @@ target 'parchateApp_frontend' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'parchateApp_frontendTests' do
     inherit! :complete
     # Pods for testing
