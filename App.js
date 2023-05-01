@@ -1,4 +1,5 @@
-import React from 'react';
+/*import React from 'react';
+import 'react-native-gesture-handler';
 
 import {
   SafeAreaView,
@@ -24,6 +25,28 @@ const App = () => {
         <Text>Hola </Text>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+
+export default App;
+*/
+
+import React from 'react';
+import 'react-native-gesture-handler';
+import 'nativewind'
+import { NavigationContainer } from '@react-navigation/native';
+import { DrawerNavigation } from './navigation/DrawerNavigation';
+
+
+
+
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <DrawerNavigation></DrawerNavigation>
+    </NavigationContainer>
   );
 };
 
